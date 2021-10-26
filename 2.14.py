@@ -1,3 +1,3 @@
 line = "Natalia Piechnik\nKrakow"
-print(max(word for word in line.split()))
-print(max(len(word) for word in line.split()))
+longest = max(line.split(), lambda x:len(x))
+print(longest, len(longest))
