@@ -1,16 +1,13 @@
 import fractions
 
 def skracanie(frac):
+    a = fractions.gcd(frac[0], frac[1])
     if frac[0] == 0:
         return [0, 0]
     else:
-        return [frac[0]/fractions.gcd(frac[0], frac[1]), frac[1]/fractions.gcd(frac[0], frac[1])]
+        return [frac[0]/a, frac[1]/a]
 
 def add_frac(frac1, frac2):
-    if (fractions.gcd(frac1[0], frac1[1])) != 1:
-        skracanie(frac1)
-    if (fractions.gcd(frac2[0], frac2[1])) != 1:
-        skracanie(frac2)
     if frac1[1] != frac2[1]:
         return skracanie([frac1[0]*frac2[1]+frac2[0]*frac1[1], frac1[1]*frac2[1]])
 
@@ -19,36 +16,22 @@ def add_frac(frac1, frac2):
 
 
 def sub_frac(frac1, frac2):
-    if (fractions.gcd(frac1[0], frac1[1])) != 1:
-        skracanie(frac1)
-    if (fractions.gcd(frac2[0], frac2[1])) != 1:
-        skracanie(frac2)
     if frac1[1] != frac2[1]:
         return skracanie([frac1[0]*frac2[1]-frac2[0]*frac1[1], frac1[1]*frac2[1]])
-
     else:
-        return[frac1[0]-frac2[0], frac1[0]]
+        return skracanie([frac1[0]-frac2[0], frac1[0]])
 
 
 def mul_frac(frac1, frac2):
-    if (fractions.gcd(frac1[0], frac1[1])) != 1:
-        skracanie(frac1)
-    if (fractions.gcd(frac2[0], frac2[1])) != 1:
-        skracanie(frac2)
     return skracanie([frac1[0]*frac2[0], frac1[1]*frac2[1]])
 
 
 def div_frac(frac1, frac2):
-    frac1.reverse()
-    if (fractions.gcd(frac1[0], frac1[1])) != 1:
-        skracanie(frac1)
-    if (fractions.gcd(frac2[0], frac2[1])) != 1:
-        skracanie(frac2)
-    return skracanie([frac1[0]*frac2[0], frac1[1]*frac2[1]])
+    return skracanie([frac1[0]*frac2[1], frac1[1]*frac2[0]])
 
 
 def is_positive(frac):
-    return (frac[0] > 0 and frac[1] > 0)
+    return frac[0]*frac[1] > 0
 
 
 def is_zero(frac):
@@ -58,9 +41,9 @@ def is_zero(frac):
 def cmp_frac(frac1, frac2):
     a = skracanie([frac1[0] * frac2[1], frac1[1] * frac2[1]])
     b = skracanie([frac2[0] * frac1[1], frac1[1] * frac2[1]])
-    if  a > b:
+    if a[0]/a[1] > b[0]/b[1]:
         return -1
-    elif a == b:
+    elif a[0] == b[0] and a[1] == b[1]:
         return 0
     else:
         return 1
@@ -93,7 +76,7 @@ class TestFractions(unittest.TestCase):
         self.assertEqual(mul_frac([2, 3], [4, 3]), [8, 9])
 
     def test_div_frac(self):
-        self.assertEqual(div_frac([2, 3], [4, 3]), [2, 1])
+        self.assertEqual(div_frac([2, 3], [4, 3]), [1, 2])
 
     def test_is_positive(self):
         self.assertTrue(is_positive([2, 3]), 1)
