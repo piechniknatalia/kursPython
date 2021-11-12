@@ -35,13 +35,15 @@ def is_positive(frac):
 
 
 def is_zero(frac):
-    return skracanie(frac) == [0, 0]
+    return frac[0] == 0
 
 
 def cmp_frac(frac1, frac2):
-    a = skracanie([frac1[0] * frac2[1], frac1[1] * frac2[1]])
-    b = skracanie([frac2[0] * frac1[1], frac1[1] * frac2[1]])
-    if a[0]/a[1] > b[0]/b[1]:
+    a = skracanie([frac1[0], frac1[1]])
+    b = skracanie([frac2[0], frac2[1]])
+    if a[0] == 0 and b[0] == 0:
+        return 0
+    elif a[0]/a[1] > b[0]/b[1]:
         return -1
     elif a[0] == b[0] and a[1] == b[1]:
         return 0
@@ -67,25 +69,49 @@ class TestFractions(unittest.TestCase):
         self.zero = [0, 1]
 
     def test_add_frac(self):
+        self.assertEqual(add_frac([-1, 2], [1, 3]), [-1, 6])
+    def test_add_frac(self):
         self.assertEqual(add_frac([1, 2], [1, 3]), [5, 6])
+    def test_add_frac(self):
+        self.assertEqual(add_frac([-1, -2], [1, 3]), [5, 6])
 
     def test_sub_frac(self):
-        self.assertEqual(sub_frac([1, 2], [1, 3]), [1, 6])
+        self.assertEqual(sub_frac([1, 2], [0, 3]), [0, 0])
+    def test_sub_frac(self):
+        self.assertEqual(sub_frac([-1, 2], [1, 3]), [-4, 6])
+    def test_sub_frac(self):
+        self.assertEqual(sub_frac([1, 2], [-1, -3]), [1, 6])
 
     def test_mul_frac(self):
         self.assertEqual(mul_frac([2, 3], [4, 3]), [8, 9])
+    def test_mul_frac(self):
+        self.assertEqual(mul_frac([-2, 3], [4, 3]), [-8, 9])
+    def test_mul_frac(self):
+        self.assertEqual(mul_frac([2, 3], [0, 0]), [0, 0])
 
+    def test_div_frac(self):
+        self.assertEqual(div_frac([2, 3], [4, 3]), [1, 2])
+    def test_div_frac(self):
+        self.assertEqual(div_frac([2, 3], [0, 0]), [1, 2])
     def test_div_frac(self):
         self.assertEqual(div_frac([2, 3], [4, 3]), [1, 2])
 
     def test_is_positive(self):
-        self.assertTrue(is_positive([2, 3]), 1)
+        self.assertTrue(is_positive([2, 3]), True)
+    def test_is_positive(self):
+        self.assertFalse(is_positive([0, 3]), False)
+    def test_is_positive(self):
+        self.assertFalse(is_positive([-1, 3]), False)
 
     def test_is_zero(self):
-        self.assertTrue(is_zero([0, 3]), 1)
+        self.assertTrue(is_zero([0, 3]), True)
+    def test_is_zero(self):
+        self.assertFalse(is_zero([1, 3]), False)
 
     def test_cmp_frac(self):
-        self.assertEqual(cmp_frac([3, 4], [4, 4]), -1)
+        self.assertEqual(cmp_frac([3, 4], [4, 4]), 1)
+    def test_cmp_frac(self):
+        self.assertEqual(cmp_frac([0, 4], [0, 3]), 0)
 
     def test_frac2float(self):
         self.assertAlmostEqual(frac2float([3, 4]), 0.75, places=4)
