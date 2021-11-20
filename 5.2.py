@@ -1,6 +1,8 @@
 import fractions
 
 def skracanie(frac):
+    if is zero(frac[1]):
+        raise ZeroDivisionError
     a = fractions.gcd(frac[0], frac[1])
     if frac[0] == 0:
         return [0, 0]
