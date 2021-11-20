@@ -1,8 +1,8 @@
 class Time:
-    """Klasa reprezentująca odcinek czasu."""
+    """Klasa reprezentujaca odcinek czasu."""
 
     def __init__(self, s=0):
-        """Zwraca instancję klasy Time."""
+        """Zwraca instancje klasy Time."""
         if s < 0:
             raise ValueError("ujemny czas")
         self.s = int(s)
@@ -20,11 +20,11 @@ class Time:
         return "Time({})".format(self.s)
 
     def __add__(self, other):
-        """Dodawanie odcinków czasu."""
+        """Dodawanie odcinkow czasu."""
         return Time(self.s + other.s)
 
-    #def __cmp__(self, other): # Py2, porównywanie, -1|0|+1
-    #    """Porównywanie odcinków czasu."""
+    #def __cmp__(self, other): # Py2, porownywanie, -1|0|+1
+    #    """Porownywanie odcinkow czasu."""
     #    return cmp(self.s, other.s)
 
     # Py2.7 i Py3, rich comparisons.
@@ -52,7 +52,7 @@ class Time:
         """Konwersja odcinka czasu do int."""
         return self.s
 
-# Kod testujący moduł - dopisać co najmniej dwa testy do każdej sekcji.
+# Kod testujacy modul - dopisac co najmniej dwa testy do kazdej sekcji.
 
 import unittest
 
@@ -65,9 +65,11 @@ class TestTime(unittest.TestCase):
     def test_print(self):       # test str() i repr()
         self.assertEqual(str(self.t1), "01:02:03")
         self.assertEqual(repr(self.t1), "Time(3723)")
+        self.assertEqual(repr(Time(234)), "Time(234)")
+        self.assertEqual(str(Time(234)), "00:03:54")
 
     def test_cmp(self):
-        # Trzeba sprawdzać ==, !=, >, >=, <, <=.
+        # Trzeba sprawdzac ==, !=, >, >=, <, <=.
         self.assertTrue(Time(2) == Time(2))
         self.assertFalse(Time(2) == Time(3))
         self.assertTrue(Time(2) != Time(3))
@@ -80,14 +82,19 @@ class TestTime(unittest.TestCase):
         self.assertFalse(Time(2) > Time(3))
         self.assertTrue(Time(4) >= Time(3))
         self.assertFalse(Time(2) >= Time(3))
+        self.assertTrue(Time(54) == Time(54))
+        self.assertFalse(Time(54) == Time(2))
 
-    def test_add(self):   # musi działać porównywanie
+    def test_add(self):   # musi dzialac porownywanie
         self.assertEqual(Time(1) + Time(2), Time(3))
+        self.assertEqual(Time(4) + Time(1), Time(5))
+        self.assertEqual(Time(2) + Time(5), Time(7))
 
     def test_int(self):
         self.assertEqual(int(Time(5632)), 5632)
+        self.assertEqual(int(Time(232)), 232)
+        self.assertEqual(int(Time(2232)), 2232)
 
-    def tearDown(self): pass
 
 if __name__ == "__main__":
     unittest.main()     # wszystkie testy

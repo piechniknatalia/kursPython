@@ -58,12 +58,9 @@ class TestPoint(unittest.TestCase):
     def setUp(self):
         self.p1 = Point(3, 4)
 
-    def setUp(other):
-        other.p2 = Point(1, 2)
-
     def test_print(self):       # test str() i repr()
-        self.assertEqual(str(self), "(3, 4)")
-        self.assertEqual(repr(self), "Point(3, 4)")
+        self.assertEqual(str(self.p1), "(3, 4)")
+        self.assertEqual(repr(self.p1), "Point(3, 4)")
 
     def test_cmp(self):
         self.assertTrue(Point(2, 4) == Point(2, 4))
@@ -72,25 +69,25 @@ class TestPoint(unittest.TestCase):
         self.assertFalse(Point(2, 4) != Point(2, 4))
 
     def test_add(self):
-        self.assertEqual(Point(3, 4) + Point(2, 3), Point(5, 7))
+        self.assertEqual(self.p1 + Point(2, 3), Point(5, 7))
 
     def test_sub(self):
-        self.assertEqual(Point(3, 4) - Point(2, 3), Point(1, 1))
+        self.assertEqual(self.p1 - Point(2, 3), Point(1, 1))
 
     def test_mul(self):
         self.assertEqual(Point(2, 3) * Point(1, 2), 8)
 
-    def test_cross(self, other):
-        self.assertEqual(self.cross(other), 2)
+    def test_cross(self):
+        self.assertEqual(self.p1.cross(Point(1, 2)), 2)
 
     def test_length(self):
-        self.assertEqual(self.length(), 5)
+        self.assertEqual(self.p1.length(), 5)
 
     def test_hash(self):
-        self.assertTrue(hash((self.x, self.y)) == self.hash())
+        self.assertEqual(hash(self.p1), hash((self.p1.x, self.p1.y)))
 
 if __name__ == "__main__":
-    unittest.main()     # wszystkie testy
+     unittest.main()     # wszystkie testy
 
 
 
