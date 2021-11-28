@@ -24,15 +24,15 @@ class Point:
     # Punkty jako wektory 2D.
     def __add__(self, other):
         """ v1 + v2"""
-        self.x = self.x + other.x
-        self.y = self.y + other.y
-        return self
+        a = self.x + other.x
+        b = self.y + other.y
+        return Point(a, b)
 
     def __sub__(self, other):
         """v1 - v2"""
-        self.x = self.x - other.x
-        self.y = self.y - other.y
-        return self
+        a = self.x - other.x
+        b = self.y - other.y
+        return Point(a, b)
 
     def __mul__(self, other):
         """v1 * v2, iloczyn skalarny, zwraca liczbe"""
