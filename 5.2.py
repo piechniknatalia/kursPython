@@ -1,8 +1,6 @@
 import fractions
 
 def skracanie(frac):
-    if is zero(frac[1]):
-        raise ZeroDivisionError
     a = fractions.gcd(frac[0], frac[1])
     if frac[0] == 0:
         return [0, 0]
@@ -116,8 +114,8 @@ class TestFractions(unittest.TestCase):
         self.assertEqual(cmp_frac([0, 4], [0, 3]), 0)
 
     def test_frac2float(self):
-        self.assertAlmostEqual(frac2float([3, 4]), 0.75, places=4)
 
+        self.assertAlmostEqual(frac2float([3, 4]), 0.75, places=4)
     def tearDown(self): pass
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@ class Point:
 
     def __eq__(self, other):
         """obsluga point1 == point2"""
-        return (self.x == other.x and self.y == other.y)
+        return self.x == other.x and self.y == other.y
 
     def __ne__(self, other):
         """obsluga point1 != point2"""
