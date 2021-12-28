@@ -9,8 +9,10 @@ class RandomQueue:
 
     def remove(self):   # zwraca losowy element
         r = random.randint(0, len(self.items))
-        self.items = self.items[0:r] + self.items[(r+1):]
-        return r
+        a = self.items[r]
+        self.items[r] = self.items[-1]
+        self.items.pop()
+        return a
 
     def is_empty(self):
         return not self.items
