@@ -18,13 +18,12 @@ while True:
             print("Liczba nie jest z odpowiedniego przedzialu")
         else:
             break
-
 while True:
-    x = input("Bedziemy rysowac dwukolorowy fraktal, jaki bedzie pierwszy kolor"
+    y = input("Bedziemy rysowac dwukolorowy fraktal, jaki bedzie pierwszy kolor?"
                "\n1 - czerwony\n2 - pomaranczowy\n3 - zolty\n4 - zielony\n"
                "5 - niebieski\n6 - granatowy\n7 - fioletowy\n")
     try:
-        color1 = int(x)
+        color1 = int(y)
     except ValueError:
         print("Powinienes wprowadzic liczbe od 1 do 7.")
     else:
@@ -33,11 +32,11 @@ while True:
         else:
             break
 while True:
-    x = input("Jaki bedzie drugi kolor fraktala"
+    z = input("Jaki bedzie drugi kolor fraktala?"
                "\n1 - czerwony\n2 - pomaranczowy\n3 - zolty\n4 - zielony\n"
                "5 - niebieski\n6 - granatowy\n7 - fioletowy\n")
     try:
-        color2 = int(x)
+        color2 = int(z)
     except ValueError:
         print("Powinienes wprowadzic liczbe od 1 do 7.")
     else:

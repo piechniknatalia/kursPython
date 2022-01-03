@@ -1,11 +1,11 @@
 import random
 def basic(n):
-    randomlist = range(n)
+    randomlist = list(range(n))
     random.shuffle(randomlist)
     return randomlist
 def almost(n):
     a = n // 3
-    randomlist = range(n)
+    randomlist = list(range(n))
     for i in range(a+1):
         randomlist[0 + i * 3: 3 + i * 3] = sorted(randomlist[0 + i * 3: 3 + i * 3], key=lambda x: random.random())
     return randomlist
