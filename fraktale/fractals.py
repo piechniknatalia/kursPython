@@ -1,16 +1,18 @@
-# Modul z fraktalami
+"""Modul obslugujacy rysowanie fraktali za pomoca modulu turtle"""
 
 import math
 import turtle
 
 def set_turtle():
+    """Funkcja ustawiajaca poczatkowe dane zolwia"""
     turtle.bgcolor("black")
     turtle1 = turtle.Turtle()
     turtle1.hideturtle()
     return turtle1
 
+
 def tree(color1, color2, turtle, length):
-    """Funkcja rysujaca fraktal przypominajacy drzewo za pomoca modulu turtle"""
+    """Funkcja rysujaca fraktal przypominajacy drzewo"""
     turtle.color(color1)
     angle = 30
     length_change = 5
@@ -19,20 +21,17 @@ def tree(color1, color2, turtle, length):
         turtle.color(color1)
         turtle.forward(length)
         new_length = length - length_change
-
         turtle.left(angle)
-        tree(color1, color2, t, new_length)
-
+        tree(color1, color2, turtle, new_length)
         turtle.right(2 * angle)
-        tree(color2, color1, t, new_length)
-
+        tree(color2, color1, turtle, new_length)
         turtle.left(angle)
         turtle.color(color1)
         turtle.backward(length)
 
 
 def snowflake(color1, color2, turtle, iterations, length):
-    """Funkcja rysujaca fraktal przypominajacy sniezynke za pomoca modulu turtle"""
+    """Funkcja rysujaca fraktal przypominajacy sniezynke"""
     turtle.color(color1)
     if iterations == 0:
         turtle.forward(length)
@@ -49,7 +48,7 @@ def snowflake(color1, color2, turtle, iterations, length):
 
 
 def fiboshell(color1, color2, turtle, n):
-    """Funkcja rysujaca fraktal przypominajacy muszle za pomoca modulu turtle"""
+    """Funkcja rysujaca fraktal przypominajacy muszle """
     turtle.color(color1)
     factor = 3
     a = 0
@@ -78,21 +77,24 @@ def draw(turtle, type, size, color1, color2):
                      '4': 'DarkOliveGreen3',
                      '5': 'CadetBlue',
                      '6': 'blue2',
-                     '7': 'BlueViolet'}
+                     '7': 'BlueViolet'
+                     }
+    turtle_color1 = set_of_colors[str(color1)]
+    turtle_color2 = set_of_colors[str(color2)]
     if type == 'd':
-        length = 20 + (size-1) * 3
+        length = 20 + (size - 1) * 3
         turtle.setheading(90)
-        tree(set_of_colors[str(color1)], set_of_colors[str(color2)], turtle, length)
+        tree(turtle_color1, turtle_color2, turtle, length)
     elif type == 's':
         length = round(1 + (size - 1) * 0.3)
         turtle.up()
-        turtle.forward(300/2)
+        turtle.forward(300 / 2)
         turtle.left(180)
         turtle.down()
         turtle.right(90)
         for i in range(3):
-            snowflake(set_of_colors[str(color1)], set_of_colors[str(color2)], turtle, length, 300)
+            snowflake(turtle_color1, turtle_color2, turtle, length, 300)
             turtle.right(120)
     elif type == 'm':
         length = round(1 + (size - 1) * 1.2)
-        fiboshell(set_of_colors[str(color1)], set_of_colors[str(color2)], turtle, length)
+        fiboshell(turtle_color1, turtle_color2, turtle, length)

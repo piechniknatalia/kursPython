@@ -3,10 +3,16 @@ import fractals
 #zbior fraktali do wyboru
 set_of_types = {'d', 's', 'm'}
 
-type = input("Jaki fraktal chcesz narysowac? Do wyboru mamy drzewo, sniezynke i muszle.\nWybierz d, s lub m :)\n")
+#czesc sluzaca wprowadzeniu przed uzytkownika
+#typu fraktala do narysowania
+type = input("Jaki fraktal chcesz narysowac? \nDo wyboru mamy drzewo, "
+             "sniezynke i muszle. Wybierz d, s lub m :)\n")
 while type not in set_of_types:
-    type = input("Do wyboru masz jedynie d dla drzewa, s dla sniezynki i m dla muszli.\n")
+    type = input("Do wyboru masz jedynie d dla drzewa, s dla sniezynki"
+                 " i m dla muszli.\n")
 
+#czesc sluzaca wprowadzeniu przez uzytkownika
+#wielkosci fraktala
 while True:
     x = input("Jakiej wielkosci w skali od 1 do 10 ma byc fraktal?\n")
     try:
@@ -18,10 +24,13 @@ while True:
             print("Liczba nie jest z odpowiedniego przedzialu")
         else:
             break
+
+#czesc sluzaca wprowadzeniu przez uzytkownika
+#kolorow fraktala
 while True:
-    y = input("Bedziemy rysowac dwukolorowy fraktal, jaki bedzie pierwszy kolor?"
-               "\n1 - czerwony\n2 - pomaranczowy\n3 - zolty\n4 - zielony\n"
-               "5 - niebieski\n6 - granatowy\n7 - fioletowy\n")
+    y = input("Bedziemy rysowac dwukolorowy fraktal, jaki bedzie pierwszy "
+              "kolor?\n1 - czerwony\n2 - pomaranczowy\n3 - zolty\n4 - "
+              "zielony\n5 - niebieski\n6 - granatowy\n7 - fioletowy\n")
     try:
         color1 = int(y)
     except ValueError:
@@ -32,9 +41,9 @@ while True:
         else:
             break
 while True:
-    z = input("Jaki bedzie drugi kolor fraktala?"
-               "\n1 - czerwony\n2 - pomaranczowy\n3 - zolty\n4 - zielony\n"
-               "5 - niebieski\n6 - granatowy\n7 - fioletowy\n")
+    z = input("Jaki bedzie drugi kolor fraktala?\n1 - czerwony\n2 - "
+              "pomaranczowy\n3 - zolty\n4 - zielony\n5 - niebieski\n6 "
+              "- granatowy\n7 - fioletowy\n")
     try:
         color2 = int(z)
     except ValueError:
@@ -45,7 +54,7 @@ while True:
         else:
             break
 
-
+#wywolanie funkcji rysujacej wybrany przez uzytkownika fraktal
 fractals.draw(fractals.set_turtle, type, size, color1, color2)
 
 
