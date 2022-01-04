@@ -1,4 +1,4 @@
-"""Modul obslugujacy rysowanie fraktali za pomoca modulu turtle"""
+"""Modul obslugujacy rysowanie ksztaltow za pomoca modulu turtle"""
 
 import math
 import turtle
@@ -15,12 +15,10 @@ def tree(color1, color2, turtle, length):
     """Funkcja rysujaca fraktal przypominajacy drzewo"""
     turtle.color(color1)
     angle = 30
-    length_change = 5
     miniumum_length = 5
     if length > miniumum_length:
-        turtle.color(color1)
         turtle.forward(length)
-        new_length = length - length_change
+        new_length = length - 5
         turtle.left(angle)
         tree(color1, color2, turtle, new_length)
         turtle.right(2 * angle)
@@ -30,7 +28,7 @@ def tree(color1, color2, turtle, length):
         turtle.backward(length)
 
 
-def snowflake(color1, color2, turtle, iterations, length):
+def snowflake(color1, color2, turtle, iterations, length=300):
     """Funkcja rysujaca fraktal przypominajacy sniezynke"""
     turtle.color(color1)
     if iterations == 0:
@@ -48,9 +46,7 @@ def snowflake(color1, color2, turtle, iterations, length):
 
 
 def fiboshell(color1, color2, turtle, n):
-    """Funkcja rysujaca fraktal przypominajacy muszle """
-    turtle.color(color1)
-    factor = 3
+    """Funkcja rysujaca ksztalt przypominajacy spirale """
     a = 0
     b = 1
     for i in range(n):
@@ -58,7 +54,7 @@ def fiboshell(color1, color2, turtle, n):
             turtle.color(color1)
         else:
             turtle.color(color2)
-        curve = math.pi * b * factor / 2
+        curve = math.pi * b * 3 / 2 #mnozymy razy 3, zeby zwiekszyc skale
         curve = curve / 90
         for j in range(90):
             turtle.forward(curve)
@@ -69,7 +65,7 @@ def fiboshell(color1, color2, turtle, n):
 
 
 def draw(turtle, type, size, color1, color2):
-    """Funkcja rysujaca fraktale w zaleznosci od podanych danych"""
+    """Funkcja rysujaca ksztalty w zaleznosci od podanych danych"""
     # zbior kolorow do wyboru
     set_of_colors = {'1': 'brown1',
                      '2': 'chocolate1',
@@ -86,15 +82,16 @@ def draw(turtle, type, size, color1, color2):
         turtle.setheading(90)
         tree(turtle_color1, turtle_color2, turtle, length)
     elif type == 's':
-        length = round(1 + (size - 1) * 0.3)
+        size = round(1 + (size - 1) * 0.3)
         turtle.up()
-        turtle.forward(300 / 2)
         turtle.left(180)
+        turtle.forward(300 / 2)
+        turtle.right(180)
         turtle.down()
-        turtle.right(90)
         for i in range(3):
-            snowflake(turtle_color1, turtle_color2, turtle, length, 300)
+            snowflake(turtle_color1, turtle_color2, turtle, size, 300)
             turtle.right(120)
     elif type == 'm':
         length = round(1 + (size - 1) * 1.2)
         fiboshell(turtle_color1, turtle_color2, turtle, length)
+    input("Kliknij enter kiedy bedziesz chcial wylaczyc ekran")
